@@ -1,0 +1,441 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     14237,        433]
+NotebookOptionsPosition[     12252,        357]
+NotebookOutlinePosition[     12600,        372]
+CellTagsIndexPosition[     12557,        369]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Joy of Mathematics", "Title",
+ CellChangeTimes->{{3.6901976705958357`*^9, 3.6901976739699936`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Author: Shishir Reddy", "Chapter",
+ CellChangeTimes->{{3.6901976770063143`*^9, 3.690197685316517*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Info", "Subsection",
+ CellChangeTimes->{{3.6902059507072964`*^9, 3.69020595109188*^9}}],
+
+Cell[TextData[{
+ StyleBox["Title:",
+  FontWeight->"Bold"],
+ " The Joy of Mathematics: Discovering Mathematics All Around You\n",
+ StyleBox["Author:",
+  FontWeight->"Bold"],
+ " Theoni Pappas\n",
+ StyleBox["Publishing  Info:",
+  FontWeight->"Bold"],
+ " Wide World Pub./Tetra\n",
+ StyleBox["Date:",
+  FontWeight->"Bold"],
+ " 1989"
+}], "Text",
+ CellChangeTimes->{{3.6902059666152043`*^9, 3.6902060687367907`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Report", "Section",
+ CellChangeTimes->{{3.690197825584981*^9, 3.690197828828755*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Summary", "Subsection",
+ CellChangeTimes->{{3.690197844791218*^9, 3.690197846462383*^9}}],
+
+Cell["\<\
+The Joy of Mathematics covers several mathematical concepts and anchors them \
+to reality with historical applications and contexts. The book covers a wide \
+variety of concepts with varying levels of abstraction ranging from fractals \
+and the golden rectangle to magic squares and puzzles. Each concept is \
+detailed with an image and the problems or puzzles are broken down, often \
+with an equation.\
+\>", "Text",
+ CellChangeTimes->{{3.690197848813702*^9, 3.690197890764572*^9}, {
+  3.690197975776181*^9, 3.6901980739480076`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Review", "Subsection",
+ CellChangeTimes->{{3.690198084427891*^9, 3.690198085297981*^9}}],
+
+Cell["\<\
+I would recommend this book to people of all ages because it simplifies the \
+concepts and provides accurate historical representations to prevent people \
+from getting too lost. It also reads very quickly as each concept takes no \
+more than a page or two and it manages to remain interesting throughout the \
+entire book.\
+\>", "Text",
+ CellChangeTimes->{{3.690198094525344*^9, 3.690198221526202*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["What I Learned", "Subsection",
+ CellChangeTimes->{{3.690198232371273*^9, 3.690198235903747*^9}}],
+
+Cell["\<\
+I mainly learned obscure mathematical concepts and situations that were fun \
+to model and have some basis in reality. \
+\>", "Text",
+ CellChangeTimes->{{3.690198241278066*^9, 3.690198333574421*^9}}]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Mathematica Elaboration", "Section",
+ CellChangeTimes->{{3.690198363912923*^9, 3.6901983668010025`*^9}}],
+
+Cell[TextData[StyleBox["Cycloid", "Subsection"]], "Subsubsection",
+ CellChangeTimes->{{3.6895200311604834`*^9, 3.6895200350310726`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Description", "Subsubsection",
+ CellChangeTimes->{{3.6901983898040714`*^9, 3.690198391205759*^9}}],
+
+Cell["\<\
+A cycloid refer to the path drawn by a point on a circle rolling across a \
+line at constant speed. What I found interesting was the representation of \
+the point\[CloseCurlyQuote]s acceleration. Even though the circle and the \
+path are both moving at constant speed, the point appears to outrun the path \
+and slows down near the ends, showing its acceleration and deceleration.\
+\>", "Text",
+ CellChangeTimes->{{3.6902055580127187`*^9, 3.690205636367897*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Code", "Subsubsection",
+ CellChangeTimes->{{3.6901983939016504`*^9, 3.690198394280305*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"r", "[", "t_", "]"}], ":=", 
+   RowBox[{"-", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Pi", "*", 
+        RowBox[{"Cos", "[", "t", "]"}]}], "-", "Pi"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "2"}], 
+        RowBox[{"Sin", "[", "t", "]"}]}], "+", "1"}]}], "}"}]}]}], " ", 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Show", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Graphics", "[", 
+      RowBox[{
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Rotate", "[", 
+          RowBox[{
+           RowBox[{"{", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"Circle", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"\[Alpha]", ",", "0"}], "}"}], ",", "1"}], "]"}], 
+              "}"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"PointSize", "[", "0.015", "]"}], ",", 
+               RowBox[{"Point", "[", 
+                RowBox[{"{", 
+                 RowBox[{"\[Alpha]", ",", 
+                  RowBox[{"-", "1"}]}], "}"}], "]"}]}], "}"}]}], 
+            "\[IndentingNewLine]", "}"}], ",", 
+           RowBox[{"-", "\[Alpha]"}]}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{"Line", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"-", "5"}], ",", 
+               RowBox[{"-", "1"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"15", ",", 
+               RowBox[{"-", "1"}]}], "}"}]}], "}"}], "]"}], "}"}]}], 
+        "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "1"}], ",", "10"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "2"}], ",", "3"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{"check", ",", 
+       RowBox[{"ParametricPlot", "[", 
+        RowBox[{
+         RowBox[{"r", "[", 
+          RowBox[{"x", "/", "2"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", "0", ",", "\[Alpha]"}], "}"}], ",", 
+         RowBox[{"PlotStyle", "\[Rule]", "Red"}]}], "]"}], ",", 
+       RowBox[{"{", "}"}]}], "]"}]}], "\[IndentingNewLine]", "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"\[Alpha]", ",", "0.001", ",", 
+     RowBox[{"2", "Pi"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Open\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"check", ",", "False", ",", "\"\<Show Path\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"False", ",", "True"}], "}"}], ",", "Checkbox"}], "}"}]}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.689520645742137*^9, 3.6895206553387933`*^9}, {
+   3.689520686680997*^9, 3.689520785201456*^9}, {3.6895208213199453`*^9, 
+   3.6895208968611574`*^9}, {3.6895209550291443`*^9, 
+   3.6895210411991014`*^9}, {3.6895210716613703`*^9, 
+   3.6895210768857374`*^9}, {3.6895214235704737`*^9, 
+   3.6895214370994034`*^9}, {3.689522902708399*^9, 3.6895229030485406`*^9}, {
+   3.689522946187394*^9, 3.6895229885508394`*^9}, {3.689523094794179*^9, 
+   3.6895232725503917`*^9}, 3.6895235061624765`*^9, 3.689523685198827*^9, {
+   3.6896102695363617`*^9, 3.689610329213887*^9}, 3.6896104374573336`*^9, {
+   3.6896107162326417`*^9, 3.6896108302058477`*^9}, {3.6896108954486217`*^9, 
+   3.6896109082596817`*^9}, {3.6896110571707373`*^9, 3.6896110800744*^9}, {
+   3.689611316366889*^9, 3.6896114238481784`*^9}, {3.689611454820827*^9, 
+   3.6896114637463493`*^9}, {3.6896115337156343`*^9, 3.689611607149207*^9}, {
+   3.689611842573085*^9, 3.6896119089859753`*^9}, {3.6896148698370533`*^9, 
+   3.689614872358693*^9}, {3.6896149064591074`*^9, 3.6896149738544416`*^9}, {
+   3.689615086923977*^9, 3.6896150895509253`*^9}, {3.689615249745285*^9, 
+   3.68961530948455*^9}, {3.6896154851893797`*^9, 3.689615532552393*^9}}]
+}, Open  ]],
+
+Cell[TextData[StyleBox["Fractals", "Subsection"]], "Subsubsection",
+ CellChangeTimes->{{3.6896887628837996`*^9, 3.689688763946411*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Description", "Subsubsection",
+ CellChangeTimes->{{3.6901983985536695`*^9, 3.690198399954749*^9}}],
+
+Cell["Fractals are interesting.", "Text",
+ CellChangeTimes->{{3.690205643388796*^9, 3.690205647760198*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Code", "Subsubsection",
+ CellChangeTimes->{{3.690198402663116*^9, 3.6901984029786186`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"rules", "=", 
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"1", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "0", ",", "1"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1"}], "}"}]}], "}"}]}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"0", "\[Rule]", 
+      RowBox[{"ConstantArray", "[", 
+       RowBox[{"0", ",", 
+        RowBox[{"{", 
+         RowBox[{"3", ",", "3"}], "}"}]}], "]"}]}]}], "\[IndentingNewLine]", 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Do", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Iteration", "[", "y", "]"}], "=", 
+     RowBox[{"ArrayPlot", "@", 
+      RowBox[{"Last", "[", 
+       RowBox[{"SubstitutionSystem", "[", 
+        RowBox[{"rules", ",", 
+         RowBox[{"{", 
+          RowBox[{"{", "1", "}"}], "}"}], ",", "y"}], "]"}], "]"}]}]}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"y", ",", "1", ",", "5"}], "}"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Iteration", "[", "\[Alpha]", "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"\[Alpha]", ",", "1", ",", "5", ",", "1"}], "}"}]}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.6896889793735886`*^9, 3.6896890407806253`*^9}, 
+   3.6896890739686213`*^9, {3.68968911067222*^9, 3.6896891263286734`*^9}, {
+   3.6900418703121777`*^9, 3.6900418738250046`*^9}, {3.690041969445896*^9, 
+   3.6900419808688264`*^9}}]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Follow-Up", "Section",
+ CellChangeTimes->{{3.6902056756156883`*^9, 3.690205677531831*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["What I Learned", "Subsection",
+ CellChangeTimes->{{3.690205683218272*^9, 3.6902056866665497`*^9}}],
+
+Cell["\<\
+The cycloid provided a good representation of angular velocity and modeling \
+the path of the point with parametric equations strengthened my manipulate \
+skills. Creating the fractals gave me a better idea of how nested arrays work \
+and behave in Mathematica.\
+\>", "Text",
+ CellChangeTimes->{{3.690205695069925*^9, 3.6902057380243316`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Further Study", "Subsection",
+ CellChangeTimes->{{3.6902057421573677`*^9, 3.690205743710497*^9}}],
+
+Cell["\<\
+If I had more time and experience I would model a concept in the book \
+referring to the path that an electron makes as it orbits a field. If I \
+could, I\[CloseCurlyQuote]d like to model the gravitational acceleration of \
+multiple points towards each other as well as a large central source because \
+it would look cool.\
+\>", "Text",
+ CellChangeTimes->{{3.6902057465268297`*^9, 3.690205808856881*^9}}]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Credits", "Section",
+ CellChangeTimes->{{3.690205900192339*^9, 3.6902059010776987`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Book", "Subsection",
+ CellChangeTimes->{{3.690205927984416*^9, 3.6902059287529106`*^9}}],
+
+Cell["\<\
+Pappas, Theoni. The Joy of Mathematics: Discovering Mathematics All around \
+You. San Carlos, CA: Wide World Pub./Tetra, 1989. Print.\
+\>", "Text",
+ CellChangeTimes->{3.6902059320875006`*^9}]
+}, Open  ]]
+}, Closed]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1280, 637},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 105, 1, 101, "Title"],
+Cell[CellGroupData[{
+Cell[710, 27, 108, 1, 72, "Chapter"],
+Cell[CellGroupData[{
+Cell[843, 32, 93, 1, 49, "Subsection"],
+Cell[939, 35, 409, 14, 87, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1385, 54, 91, 1, 70, "Section"],
+Cell[CellGroupData[{
+Cell[1501, 59, 95, 1, 49, "Subsection"],
+Cell[1599, 62, 544, 9, 68, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2180, 76, 94, 1, 49, "Subsection"],
+Cell[2277, 79, 413, 7, 49, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2727, 91, 102, 1, 49, "Subsection"],
+Cell[2832, 94, 209, 4, 30, "Text"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[3090, 104, 110, 1, 56, "Section"],
+Cell[3203, 107, 136, 1, 41, "Subsubsection"],
+Cell[CellGroupData[{
+Cell[3364, 112, 104, 1, 33, "Subsubsection"],
+Cell[3471, 115, 472, 7, 49, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3980, 127, 97, 1, 39, "Subsubsection"],
+Cell[4080, 130, 4265, 103, 297, "Input"]
+}, Open  ]],
+Cell[8360, 236, 135, 1, 41, "Subsubsection"],
+Cell[CellGroupData[{
+Cell[8520, 241, 104, 1, 33, "Subsubsection"],
+Cell[8627, 244, 107, 1, 30, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8771, 250, 97, 1, 39, "Subsubsection"],
+Cell[8871, 253, 1676, 45, 202, "Input"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[10596, 304, 96, 1, 56, "Section"],
+Cell[CellGroupData[{
+Cell[10717, 309, 104, 1, 49, "Subsection"],
+Cell[10824, 312, 353, 6, 49, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11214, 323, 103, 1, 49, "Subsection"],
+Cell[11320, 326, 414, 7, 49, "Text"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[11783, 339, 94, 1, 56, "Section"],
+Cell[CellGroupData[{
+Cell[11902, 344, 94, 1, 49, "Subsection"],
+Cell[11999, 347, 201, 4, 30, "Text"]
+}, Open  ]]
+}, Closed]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

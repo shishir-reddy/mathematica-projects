@@ -1,0 +1,2037 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     77236,       2029]
+NotebookOptionsPosition[     74500,       1957]
+NotebookOutlinePosition[     74842,       1972]
+CellTagsIndexPosition[     74799,       1969]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"glider", "=", 
+   RowBox[{"CellularAutomaton", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"224", ",", 
+       RowBox[{"{", 
+        RowBox[{"2", ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"2", ",", "2", ",", "2"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"2", ",", "1", ",", "2"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"2", ",", "2", ",", "2"}], "}"}]}], "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "1"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"0", ",", "1", ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "0", ",", "1"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1", ",", "1"}], "}"}]}], "}"}], ",", "0"}], 
+      "}"}], ",", "50"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6978045748162327`*^9, 3.6978045802663083`*^9}, 
+   3.697806930099224*^9, 3.6978069609842486`*^9, {3.697819405743617*^9, 
+   3.697819422774701*^9}, 3.6978194611933403`*^9, {3.6978196183698897`*^9, 
+   3.6978196184792905`*^9}},ExpressionUUID->"11cf0cca-6ea7-4aa7-86e7-\
+a93958b22bb5"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"deadCellDelete", "[", "list_", "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"Which", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"Flatten", "[", 
+        RowBox[{"Position", "[", 
+         RowBox[{"list", ",", "1"}], "]"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "\[NotEqual]", "1"}], "&&", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Flatten", "[", 
+        RowBox[{"Position", "[", 
+         RowBox[{"list", ",", "1"}], "]"}], "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"-", "2"}], "]"}], "]"}], "==", 
+      RowBox[{"Length", "@", "list"}]}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Delete", "[", 
+     RowBox[{"list", ",", 
+      RowBox[{"List", "/@", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{"Range", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Flatten", "[", 
+            RowBox[{"Position", "[", 
+             RowBox[{"list", ",", "1"}], "]"}], "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "-", "1"}], "]"}], "]"}]}]}], 
+     "]"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"Flatten", "[", 
+        RowBox[{"Position", "[", 
+         RowBox[{"list", ",", "1"}], "]"}], "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"-", "2"}], "]"}], "]"}], "\[NotEqual]", 
+      RowBox[{"Length", "@", "list"}]}], "&&", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Flatten", "[", 
+        RowBox[{"Position", "[", 
+         RowBox[{"list", ",", "1"}], "]"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "==", "1"}]}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Delete", "[", 
+     RowBox[{"list", ",", 
+      RowBox[{"List", "/@", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{"Range", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"Flatten", "[", 
+             RowBox[{"Position", "[", 
+              RowBox[{"list", ",", "1"}], "]"}], "]"}], "[", 
+            RowBox[{"[", 
+             RowBox[{"-", "2"}], "]"}], "]"}], "+", "1"}], ",", 
+          RowBox[{"Length", "@", "list"}]}], "]"}], "]"}]}]}], "]"}], ",", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"Flatten", "[", 
+        RowBox[{"Position", "[", 
+         RowBox[{"list", ",", "1"}], "]"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "\[NotEqual]", "1"}], "&&", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Flatten", "[", 
+        RowBox[{"Position", "[", 
+         RowBox[{"list", ",", "1"}], "]"}], "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"-", "2"}], "]"}], "]"}], "\[NotEqual]", 
+      RowBox[{"Length", "@", "list"}]}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Delete", "[", 
+     RowBox[{"list", ",", 
+      RowBox[{"List", "/@", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{"Join", "[", 
+         RowBox[{
+          RowBox[{"Range", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Flatten", "[", 
+              RowBox[{"Position", "[", 
+               RowBox[{"list", ",", "1"}], "]"}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "-", "1"}], "]"}], ",", 
+          RowBox[{"Range", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"Flatten", "[", 
+               RowBox[{"Position", "[", 
+                RowBox[{"list", ",", "1"}], "]"}], "]"}], "[", 
+              RowBox[{"[", 
+               RowBox[{"-", "2"}], "]"}], "]"}], "+", "1"}], ",", 
+            RowBox[{"Length", "@", "list"}]}], "]"}]}], "]"}], "]"}]}]}], 
+     "]"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"Flatten", "[", 
+        RowBox[{"Position", "[", 
+         RowBox[{"list", ",", "1"}], "]"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "==", "1"}], "&&", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Flatten", "[", 
+        RowBox[{"Position", "[", 
+         RowBox[{"list", ",", "1"}], "]"}], "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{"-", "2"}], "]"}], "]"}], "==", 
+      RowBox[{"Length", "@", "list"}]}]}], ",", "\[IndentingNewLine]", 
+    "list"}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6978188539933968`*^9, 3.6978190470379896`*^9}, {
+  3.697819080737075*^9, 
+  3.697819161224749*^9}},ExpressionUUID->"7a9ebd31-9189-4884-bc39-\
+616a1613b5b1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"formatList", "[", "list_", "]"}], ":=", 
+   RowBox[{"Transpose", "@", 
+    RowBox[{"deadCellDelete", "@", 
+     RowBox[{"Transpose", "@", 
+      RowBox[{"deadCellDelete", "@", "list"}]}]}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.697818403650168*^9, 
+  3.697818455964853*^9}},ExpressionUUID->"eb9b4f48-b973-4c8f-ab09-\
+d62235b05a8c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ArrayPlot", "@", 
+  RowBox[{"formatList", "[", 
+   RowBox[{"Reverse", "@", 
+    RowBox[{"glider", "[", 
+     RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.697819467818556*^9, 
+  3.697819468834195*^9}},ExpressionUUID->"9c81e426-7df4-4354-ad1b-\
+91e5e198659d"],
+
+Cell[BoxData[
+ GraphicsBox[
+  RasterBox[{{1, 0, 1}, {1, 1, 0}, {0, 0, 0}}, {{0, 0}, {3, 3}}, {0, 1}],
+  Frame->Automatic,
+  FrameLabel->{None, None},
+  FrameTicks->{{None, None}, {None, None}},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  Method->{
+   "DefaultBoundaryStyle" -> Automatic, "DefaultPlotStyle" -> 
+    Automatic}]], "Output",
+ CellChangeTimes->{
+  3.697819469427883*^9, 3.697819621665052*^9, 3.697896627649141*^9, 
+   3.6978966878151336`*^9, 3.6979010328530583`*^9, 3.6979962705283413`*^9, 
+   3.6984118540890245`*^9, 3.698419595915761*^9, {3.6992781682281976`*^9, 
+   3.6992781711890955`*^9}, 
+   3.7445712923148317`*^9},ExpressionUUID->"3906ba44-29b7-4ee5-b79a-\
+77a310e4b003"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"sample1", "=", 
+   RowBox[{"CellularAutomaton", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"224", ",", 
+       RowBox[{"{", 
+        RowBox[{"2", ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"2", ",", "2", ",", "2"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"2", ",", "1", ",", "2"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"2", ",", "2", ",", "2"}], "}"}]}], "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "1"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0"}], 
+          "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "0", ",", "1", ",", "1", ",", "1", ",", "0", ",", "1", ",", "0"}], 
+          "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0"}], 
+          "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "1", ",", "0"}], 
+          "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "0", ",", "0", ",", "1", ",", "1", ",", "0", ",", "1", ",", "0"}], 
+          "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "0", ",", "1", ",", "0", ",", "1", ",", "0", ",", "1", ",", "0"}], 
+          "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0"}], 
+          "}"}]}], "}"}], ",", "0"}], "}"}], ",", "1000"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.6978087834148865`*^9, 3.6978087918212786`*^9}, {
+   3.6978104384415407`*^9, 3.697810442513138*^9}, 3.697810621212141*^9, {
+   3.697811159035857*^9, 3.6978111596921062`*^9}, 3.6978115216011305`*^9, {
+   3.697811651056287*^9, 3.6978116519397507`*^9}, {3.6978119126005163`*^9, 
+   3.6978119156474977`*^9}, {3.697996362591155*^9, 
+   3.6979963630130367`*^9}},ExpressionUUID->"5edbf950-b462-44c6-bdfb-\
+e39b285cc152"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ArrayPlot", "@", 
+  RowBox[{"formatList", "[", 
+   RowBox[{"Reverse", "@", 
+    RowBox[{"sample1", "[", 
+     RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.697819346493532*^9, 
+  3.697819357471774*^9}},ExpressionUUID->"4c29d2c4-ee87-4150-a60a-\
+e7a37936768b"],
+
+Cell[BoxData[
+ GraphicsBox[
+  RasterBox[{{0, 0, 0, 1, 0}, {0, 1, 1, 1, 1}, {1, 1, 1, 0, 0}, {1, 0, 0, 1, 
+   0}, {0, 1, 0, 1, 0}}, {{0, 0}, {5, 5}}, {0, 1}],
+  Frame->Automatic,
+  FrameLabel->{None, None},
+  FrameTicks->{{None, None}, {None, None}},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  Method->{
+   "DefaultBoundaryStyle" -> Automatic, "DefaultPlotStyle" -> 
+    Automatic}]], "Output",
+ CellChangeTimes->{
+  3.6978193581466727`*^9, {3.697896667627907*^9, 3.697896697074874*^9}, 
+   3.697901067979835*^9, 3.6979963094966507`*^9, 3.698411855214039*^9, 
+   3.6984195970720463`*^9, {3.6992781694995565`*^9, 3.6992781724390955`*^9}, 
+   3.744571293670207*^9},ExpressionUUID->"9e43575e-02d6-455c-aa02-\
+c9ac0609eace"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"gliderGunOriginal", "=", 
+   RowBox[{"CellularAutomaton", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"224", ",", 
+       RowBox[{"{", 
+        RowBox[{"2", ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"2", ",", "2", ",", "2"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"2", ",", "1", ",", "2"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"2", ",", "2", ",", "2"}], "}"}]}], "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "1"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Transpose", "@", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "1", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "1", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "1", ",", "1", ",", "1", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "1", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "1", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "1", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "1", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "1", ",", "1", ",", "1", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "1", 
+            ",", "1", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "1", 
+            ",", "1", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", 
+            ",", "0", ",", "1", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "1", ",", "1", ",", "0", ",", "0", 
+            ",", "0", ",", "1", ",", "1", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "1", 
+            ",", "1", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "1", 
+            ",", "1", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+            ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}]}], "}"}]}], ",", 
+       "0"}], "}"}], ",", "1000"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6978177403613625`*^9, 3.697817762231178*^9}, {
+  3.697817801325248*^9, 3.6978178905337753`*^9}, {3.6978179280381346`*^9, 
+  3.697818145451209*^9}, {3.697818210515979*^9, 3.697818221442954*^9}, {
+  3.6978183146632657`*^9, 
+  3.6978183165940523`*^9}},ExpressionUUID->"d75341f0-e0ce-48e7-b809-\
+9512a5d4e0e1"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ArrayPlot", "@", 
+  RowBox[{"formatList", "[", 
+   RowBox[{"Reverse", "@", 
+    RowBox[{"gliderGunOriginal", "[", 
+     RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6978191857423186`*^9, 
+  3.6978192183202667`*^9}},ExpressionUUID->"e951e8ac-e030-4a9f-8de3-\
+e86254977862"],
+
+Cell[BoxData[
+ GraphicsBox[RasterBox[CompressedData["
+1:eJxTTMoPSmJiYGDgBGIVIGZEAqg8rIABigkoQShCVowwH2IMhM+ARw1UJW4b
+4e7B5xMYjzjfMhDyIJLrIAAAIw4C9g==
+   "], {{0, 0}, {36, 9}}, {0, 1}],
+  Frame->Automatic,
+  FrameLabel->{None, None},
+  FrameTicks->{{None, None}, {None, None}},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  Method->{
+   "DefaultBoundaryStyle" -> Automatic, "DefaultPlotStyle" -> 
+    Automatic}]], "Output",
+ CellChangeTimes->{{3.6978191999134455`*^9, 3.6978192185545893`*^9}, 
+   3.6978966687473917`*^9, 3.6978967012780766`*^9, 3.697901068823591*^9, 
+   3.697996310371663*^9, 3.69841185607343*^9, 3.698419597931415*^9, {
+   3.6992781704341617`*^9, 3.6992781733609843`*^9}, 
+   3.7445712947892137`*^9},ExpressionUUID->"9ae80cea-d846-4eb5-ad3c-\
+35a9ce64e6ed"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"ArrayPlot", "@", 
+    RowBox[{"glider", "[", 
+     RowBox[{"[", "var", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"var", ",", "1", ",", "50", ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6978195599672003`*^9, 
+  3.697819626510818*^9}},ExpressionUUID->"fe4f74c1-e860-4113-a11a-\
+622ad06c000d"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`var$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`var$$], 1, 50, 1}}, Typeset`size$$ = {
+    360., {189., 193.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`var$4534$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`var$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`var$$, $CellContext`var$4534$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ArrayPlot[
+        Part[$CellContext`glider, $CellContext`var$$]], 
+      "Specifications" :> {{$CellContext`var$$, 1, 50, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{411., {235., 241.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.6978195841949186`*^9, 3.697819626896733*^9}, 
+   3.6978966691849327`*^9, 3.6979010688704643`*^9, 3.697996310387287*^9, 
+   3.69841185644843*^9, 3.6984195979626665`*^9, {3.6992781704966626`*^9, 
+   3.6992781733922367`*^9}, 
+   3.744571296142626*^9},ExpressionUUID->"03372221-93a4-4439-9c9a-\
+d02eedc686af"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"ArrayPlot", "[", 
+    RowBox[{"formatList", "@", 
+     RowBox[{"Reverse", "@", 
+      RowBox[{"gliderGunOriginal", "[", 
+       RowBox[{"[", "var", "]"}], "]"}]}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"var", ",", "1", ",", "1000", ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.697818285116754*^9, 3.697818286035531*^9}, {
+  3.697819251240858*^9, 3.697819284129656*^9}, {3.6979965015889654`*^9, 
+  3.6979965086202507`*^9}},ExpressionUUID->"40006fcb-d4b6-40b8-a6e2-\
+78080423e414"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`var$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`var$$], 1, 1000, 1}}, Typeset`size$$ = {
+    360., {48., 54.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`var$4592$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`var$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`var$$, $CellContext`var$4592$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ArrayPlot[
+        $CellContext`formatList[
+         Reverse[
+          Part[$CellContext`gliderGunOriginal, $CellContext`var$$]]]], 
+      "Specifications" :> {{$CellContext`var$$, 1, 1000, 1}}, "Options" :> {},
+       "DefaultOptions" :> {}],
+     ImageSizeCache->{411., {95., 101.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.697818286957402*^9, {3.697819257864917*^9, 3.6978192845046635`*^9}, 
+   3.6978966692786503`*^9, 3.6979010689485903`*^9, 3.697996310465414*^9, 
+   3.698411856557807*^9, 3.6984195980095444`*^9, {3.6992781705435376`*^9, 
+   3.6992781734391127`*^9}, 
+   3.744571296249346*^9},ExpressionUUID->"96dd6da3-ad78-4055-844a-\
+c20f0c5825ef"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"ArrayPlot", "[", 
+    RowBox[{
+     RowBox[{"formatList", "@", 
+      RowBox[{"sample1", "[", 
+       RowBox[{"[", "var", "]"}], "]"}]}], ",", 
+     RowBox[{"Mesh", "\[Rule]", "True"}]}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"var", ",", "1", ",", "1000", ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.697806994009384*^9, 3.69780701429381*^9}, 
+   3.6978071526034155`*^9, {3.697807328903805*^9, 3.697807553491719*^9}, {
+   3.6978075856277857`*^9, 3.6978075859278584`*^9}, {3.697807657603594*^9, 
+   3.6978076893744106`*^9}, {3.6978079666253657`*^9, 3.697807974912483*^9}, 
+   3.6978080979848623`*^9, {3.697808327858153*^9, 3.6978084401044626`*^9}, {
+   3.697808535896175*^9, 3.697808546810726*^9}, {3.6978088038547964`*^9, 
+   3.697808827584406*^9}, {3.6978104302226667`*^9, 3.6978104547390103`*^9}, {
+   3.6978109299780607`*^9, 3.697810932344451*^9}, {3.697811080093217*^9, 
+   3.697811085032589*^9}, {3.697811271815194*^9, 3.6978112727683697`*^9}, 
+   3.6978116079031453`*^9, {3.697817634552517*^9, 3.697817635708784*^9}, {
+   3.6978184713429008`*^9, 3.6978184753871994`*^9}, {3.697996371528699*^9, 
+   3.6979963729662185`*^9}, {3.6979965193078866`*^9, 
+   3.6979965219172974`*^9}, {3.6984197278553095`*^9, 
+   3.6984197371051455`*^9}},ExpressionUUID->"f9a7290a-220e-43b6-a764-\
+1f5d1ec0d7d3"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`var$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`var$$], 1, 1000, 1}}, Typeset`size$$ = {
+    360., {177., 182.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`var$4643$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`var$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`var$$, $CellContext`var$4643$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ArrayPlot[
+        $CellContext`formatList[
+         Part[$CellContext`sample1, $CellContext`var$$]], Mesh -> True], 
+      "Specifications" :> {{$CellContext`var$$, 1, 1000, 1}}, "Options" :> {},
+       "DefaultOptions" :> {}],
+     ImageSizeCache->{411., {224., 230.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.697817636739997*^9, 3.697818477199732*^9, 3.697896669367482*^9, 
+   3.697901069011094*^9, 3.6979963105435405`*^9, 3.6979963739974966`*^9, 
+   3.697996522136034*^9, 3.6984118566359324`*^9, 3.6984195980876884`*^9, 
+   3.698419737480072*^9, {3.6992781706265717`*^9, 3.6992781735172377`*^9}, 
+   3.7445712963300953`*^9},ExpressionUUID->"0d2d7093-bdc6-43f3-9a95-\
+47147f7a8a15"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Create", " ", "UI", " ", "for", " ", "GAME"}], "*)"}], " ", 
+  RowBox[{"(*", "Simulation", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.697819720498051*^9, 
+  3.697819734640074*^9}},ExpressionUUID->"c9e2cd57-98a9-481e-82e9-\
+83eed92c1ff9"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Module", "[", 
+  RowBox[{
+   RowBox[{"{", "values", "}"}], ",", 
+   RowBox[{"TogglerBar", "[", 
+    RowBox[{
+     RowBox[{"Dynamic", "[", "values", "]"}], ",", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"x", "=", "i"}], "}"}], ",", 
+         RowBox[{"Row", "@", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Invisible", "@", "x"}], ",", 
+            RowBox[{"Dynamic", "@", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"values", "\[NotEqual]", 
+                 RowBox[{"{", "}"}]}], "&&", 
+                RowBox[{"MemberQ", "[", 
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"values", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"#", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}],
+                     "\[Equal]", "x"}], "&"}], "/@", 
+                    RowBox[{"Range", "@", 
+                    RowBox[{"Length", "@", "values"}]}]}], ")"}], ",", 
+                  "True"}], "]"}]}], ",", 
+               RowBox[{"ArrayPlot", "[", 
+                RowBox[{"{", 
+                 RowBox[{"{", "1", "}"}], "}"}], "]"}], ",", 
+               RowBox[{"ArrayPlot", "[", 
+                RowBox[{"{", 
+                 RowBox[{"{", "0", "}"}], "}"}], "]"}]}], "]"}]}]}], 
+           "}"}]}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "9", ",", "1"}], "}"}]}], "]"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", 
+      RowBox[{"\"\<Vertical\>\"", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"Automatic", ",", "3"}], "}"}]}]}]}], "]"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJwd0EsowwEAx/HloDUTKRttyWNZiz1yQJm1DWnzmDYS88iMtSxqJsvKgdao
+DWnTklLSwm1tjdouajlYXimiZS01mctYTKL8fzt8+9y/FZoZ5UQOiURiEsHU
+9QIlz/Em6fqrK4dqVboK1tuWq+FRxFwDd0x9XKjR7otgavwiq7dZ2goZ8Wk5
+dJa0KWCydlcJyT1XBvhzbJuDlcOcVah9ubdDs7d0i0o4Hgi6oV+U8nIJF3MH
+fFAgXzqB0d71IBx5nDqFCVs8DOkt9jjcoN49Q8fo+Rc8i5Ez0PP6XcAjXAup
+adB4aGXCX85BVpZwUAh5ob2snk32GHQ55zXwsntSn7Ww3wAbV1Sz0E3uMEGx
+K2CGUZnAAp+c4ls+Pn36HqBRInmHqczNBxTKksUCwiH5Ng2mO8MMSFXoyyDX
+Z2FBaUTAh5R8awOM0YuaYELnb4datk4G/wGqxdS6
+  "],ExpressionUUID->"cbdd61f2-54a2-4a76-ad83-08ad07cccbe4"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[GridBox[{
+     {
+      SetterBox[Dynamic[
+        MemberQ[$CellContext`values$4700, 
+         Row[{
+           Invisible[1], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4701& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]], 
+        BoxForm`TogglerBarFunction[$CellContext`values$4700, 
+         Row[{
+           Invisible[1], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4701& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]]& ], {True}, 
+       TemplateBox[{
+        StyleBox["1", ShowContents -> False, StripOnInput -> False],DynamicBox[
+          ToBoxes[
+           If[
+            And[$CellContext`values$4700 != {}, 
+             MemberQ[
+              Map[
+              Part[$CellContext`values$4700, #, 1, 1, 
+                 1] == $CellContext`x$4701& , 
+               Range[
+                Length[$CellContext`values$4700]]], True]], 
+            ArrayPlot[{{1}}], 
+            ArrayPlot[{{0}}]], StandardForm]]},
+        "RowDefault"],
+       Appearance->{"Palette"}], 
+      SetterBox[Dynamic[
+        MemberQ[$CellContext`values$4700, 
+         Row[{
+           Invisible[4], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4704& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]], 
+        BoxForm`TogglerBarFunction[$CellContext`values$4700, 
+         Row[{
+           Invisible[4], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4704& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]]& ], {True}, 
+       TemplateBox[{
+        StyleBox["4", ShowContents -> False, StripOnInput -> False],DynamicBox[
+          ToBoxes[
+           If[
+            And[$CellContext`values$4700 != {}, 
+             MemberQ[
+              Map[
+              Part[$CellContext`values$4700, #, 1, 1, 
+                 1] == $CellContext`x$4704& , 
+               Range[
+                Length[$CellContext`values$4700]]], True]], 
+            ArrayPlot[{{1}}], 
+            ArrayPlot[{{0}}]], StandardForm]]},
+        "RowDefault"],
+       Appearance->{"Palette"}], 
+      SetterBox[Dynamic[
+        MemberQ[$CellContext`values$4700, 
+         Row[{
+           Invisible[7], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4707& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]], 
+        BoxForm`TogglerBarFunction[$CellContext`values$4700, 
+         Row[{
+           Invisible[7], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4707& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]]& ], {True}, 
+       TemplateBox[{
+        StyleBox["7", ShowContents -> False, StripOnInput -> False],DynamicBox[
+          ToBoxes[
+           If[
+            And[$CellContext`values$4700 != {}, 
+             MemberQ[
+              Map[
+              Part[$CellContext`values$4700, #, 1, 1, 
+                 1] == $CellContext`x$4707& , 
+               Range[
+                Length[$CellContext`values$4700]]], True]], 
+            ArrayPlot[{{1}}], 
+            ArrayPlot[{{0}}]], StandardForm]]},
+        "RowDefault"],
+       Appearance->{"Palette"}]},
+     {
+      SetterBox[Dynamic[
+        MemberQ[$CellContext`values$4700, 
+         Row[{
+           Invisible[2], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4702& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]], 
+        BoxForm`TogglerBarFunction[$CellContext`values$4700, 
+         Row[{
+           Invisible[2], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4702& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]]& ], {True}, 
+       TemplateBox[{
+        StyleBox["2", ShowContents -> False, StripOnInput -> False],DynamicBox[
+          ToBoxes[
+           If[
+            And[$CellContext`values$4700 != {}, 
+             MemberQ[
+              Map[
+              Part[$CellContext`values$4700, #, 1, 1, 
+                 1] == $CellContext`x$4702& , 
+               Range[
+                Length[$CellContext`values$4700]]], True]], 
+            ArrayPlot[{{1}}], 
+            ArrayPlot[{{0}}]], StandardForm]]},
+        "RowDefault"],
+       Appearance->{"Palette"}], 
+      SetterBox[Dynamic[
+        MemberQ[$CellContext`values$4700, 
+         Row[{
+           Invisible[5], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4705& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]], 
+        BoxForm`TogglerBarFunction[$CellContext`values$4700, 
+         Row[{
+           Invisible[5], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4705& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]]& ], {True}, 
+       TemplateBox[{
+        StyleBox["5", ShowContents -> False, StripOnInput -> False],DynamicBox[
+          ToBoxes[
+           If[
+            And[$CellContext`values$4700 != {}, 
+             MemberQ[
+              Map[
+              Part[$CellContext`values$4700, #, 1, 1, 
+                 1] == $CellContext`x$4705& , 
+               Range[
+                Length[$CellContext`values$4700]]], True]], 
+            ArrayPlot[{{1}}], 
+            ArrayPlot[{{0}}]], StandardForm]]},
+        "RowDefault"],
+       Appearance->{"Palette"}], 
+      SetterBox[Dynamic[
+        MemberQ[$CellContext`values$4700, 
+         Row[{
+           Invisible[8], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4708& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]], 
+        BoxForm`TogglerBarFunction[$CellContext`values$4700, 
+         Row[{
+           Invisible[8], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4708& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]]& ], {True}, 
+       TemplateBox[{
+        StyleBox["8", ShowContents -> False, StripOnInput -> False],DynamicBox[
+          ToBoxes[
+           If[
+            And[$CellContext`values$4700 != {}, 
+             MemberQ[
+              Map[
+              Part[$CellContext`values$4700, #, 1, 1, 
+                 1] == $CellContext`x$4708& , 
+               Range[
+                Length[$CellContext`values$4700]]], True]], 
+            ArrayPlot[{{1}}], 
+            ArrayPlot[{{0}}]], StandardForm]]},
+        "RowDefault"],
+       Appearance->{"Palette"}]},
+     {
+      SetterBox[Dynamic[
+        MemberQ[$CellContext`values$4700, 
+         Row[{
+           Invisible[3], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4703& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]], 
+        BoxForm`TogglerBarFunction[$CellContext`values$4700, 
+         Row[{
+           Invisible[3], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4703& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]]& ], {True}, 
+       TemplateBox[{
+        StyleBox["3", ShowContents -> False, StripOnInput -> False],DynamicBox[
+          ToBoxes[
+           If[
+            And[$CellContext`values$4700 != {}, 
+             MemberQ[
+              Map[
+              Part[$CellContext`values$4700, #, 1, 1, 
+                 1] == $CellContext`x$4703& , 
+               Range[
+                Length[$CellContext`values$4700]]], True]], 
+            ArrayPlot[{{1}}], 
+            ArrayPlot[{{0}}]], StandardForm]]},
+        "RowDefault"],
+       Appearance->{"Palette"}], 
+      SetterBox[Dynamic[
+        MemberQ[$CellContext`values$4700, 
+         Row[{
+           Invisible[6], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4706& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]], 
+        BoxForm`TogglerBarFunction[$CellContext`values$4700, 
+         Row[{
+           Invisible[6], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4706& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]]& ], {True}, 
+       TemplateBox[{
+        StyleBox["6", ShowContents -> False, StripOnInput -> False],DynamicBox[
+          ToBoxes[
+           If[
+            And[$CellContext`values$4700 != {}, 
+             MemberQ[
+              Map[
+              Part[$CellContext`values$4700, #, 1, 1, 
+                 1] == $CellContext`x$4706& , 
+               Range[
+                Length[$CellContext`values$4700]]], True]], 
+            ArrayPlot[{{1}}], 
+            ArrayPlot[{{0}}]], StandardForm]]},
+        "RowDefault"],
+       Appearance->{"Palette"}], 
+      SetterBox[Dynamic[
+        MemberQ[$CellContext`values$4700, 
+         Row[{
+           Invisible[9], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4709& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]], 
+        BoxForm`TogglerBarFunction[$CellContext`values$4700, 
+         Row[{
+           Invisible[9], 
+           Dynamic[
+            If[
+             And[$CellContext`values$4700 != {}, 
+              MemberQ[
+               Map[
+               Part[$CellContext`values$4700, #, 1, 1, 
+                  1] == $CellContext`x$4709& , 
+                Range[
+                 Length[$CellContext`values$4700]]], True]], 
+             ArrayPlot[{{1}}], 
+             ArrayPlot[{{0}}]]]}]]& ], {True}, 
+       TemplateBox[{
+        StyleBox["9", ShowContents -> False, StripOnInput -> False],DynamicBox[
+          ToBoxes[
+           If[
+            And[$CellContext`values$4700 != {}, 
+             MemberQ[
+              Map[
+              Part[$CellContext`values$4700, #, 1, 1, 
+                 1] == $CellContext`x$4709& , 
+               Range[
+                Length[$CellContext`values$4700]]], True]], 
+            ArrayPlot[{{1}}], 
+            ArrayPlot[{{0}}]], StandardForm]]},
+        "RowDefault"],
+       Appearance->{"Palette"}]}
+    },
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   Deployed->True],
+  TogglerBar[
+   Dynamic[$CellContext`values$4700], {
+    Row[{
+      Invisible[1], 
+      Dynamic[
+       If[
+        And[$CellContext`values$4700 != {}, 
+         MemberQ[
+          Map[
+          Part[$CellContext`values$4700, #, 1, 1, 1] == $CellContext`x$4701& , 
+           Range[
+            Length[$CellContext`values$4700]]], True]], 
+        ArrayPlot[{{1}}], 
+        ArrayPlot[{{0}}]]]}], 
+    Row[{
+      Invisible[2], 
+      Dynamic[
+       If[
+        And[$CellContext`values$4700 != {}, 
+         MemberQ[
+          Map[
+          Part[$CellContext`values$4700, #, 1, 1, 1] == $CellContext`x$4702& , 
+           Range[
+            Length[$CellContext`values$4700]]], True]], 
+        ArrayPlot[{{1}}], 
+        ArrayPlot[{{0}}]]]}], 
+    Row[{
+      Invisible[3], 
+      Dynamic[
+       If[
+        And[$CellContext`values$4700 != {}, 
+         MemberQ[
+          Map[
+          Part[$CellContext`values$4700, #, 1, 1, 1] == $CellContext`x$4703& , 
+           Range[
+            Length[$CellContext`values$4700]]], True]], 
+        ArrayPlot[{{1}}], 
+        ArrayPlot[{{0}}]]]}], 
+    Row[{
+      Invisible[4], 
+      Dynamic[
+       If[
+        And[$CellContext`values$4700 != {}, 
+         MemberQ[
+          Map[
+          Part[$CellContext`values$4700, #, 1, 1, 1] == $CellContext`x$4704& , 
+           Range[
+            Length[$CellContext`values$4700]]], True]], 
+        ArrayPlot[{{1}}], 
+        ArrayPlot[{{0}}]]]}], 
+    Row[{
+      Invisible[5], 
+      Dynamic[
+       If[
+        And[$CellContext`values$4700 != {}, 
+         MemberQ[
+          Map[
+          Part[$CellContext`values$4700, #, 1, 1, 1] == $CellContext`x$4705& , 
+           Range[
+            Length[$CellContext`values$4700]]], True]], 
+        ArrayPlot[{{1}}], 
+        ArrayPlot[{{0}}]]]}], 
+    Row[{
+      Invisible[6], 
+      Dynamic[
+       If[
+        And[$CellContext`values$4700 != {}, 
+         MemberQ[
+          Map[
+          Part[$CellContext`values$4700, #, 1, 1, 1] == $CellContext`x$4706& , 
+           Range[
+            Length[$CellContext`values$4700]]], True]], 
+        ArrayPlot[{{1}}], 
+        ArrayPlot[{{0}}]]]}], 
+    Row[{
+      Invisible[7], 
+      Dynamic[
+       If[
+        And[$CellContext`values$4700 != {}, 
+         MemberQ[
+          Map[
+          Part[$CellContext`values$4700, #, 1, 1, 1] == $CellContext`x$4707& , 
+           Range[
+            Length[$CellContext`values$4700]]], True]], 
+        ArrayPlot[{{1}}], 
+        ArrayPlot[{{0}}]]]}], 
+    Row[{
+      Invisible[8], 
+      Dynamic[
+       If[
+        And[$CellContext`values$4700 != {}, 
+         MemberQ[
+          Map[
+          Part[$CellContext`values$4700, #, 1, 1, 1] == $CellContext`x$4708& , 
+           Range[
+            Length[$CellContext`values$4700]]], True]], 
+        ArrayPlot[{{1}}], 
+        ArrayPlot[{{0}}]]]}], 
+    Row[{
+      Invisible[9], 
+      Dynamic[
+       If[
+        And[$CellContext`values$4700 != {}, 
+         MemberQ[
+          Map[
+          Part[$CellContext`values$4700, #, 1, 1, 1] == $CellContext`x$4709& , 
+           Range[
+            Length[$CellContext`values$4700]]], True]], 
+        ArrayPlot[{{1}}], 
+        ArrayPlot[{{0}}]]]}]}, 
+   Appearance -> ("Vertical" -> {Automatic, 3})]]], "Output",
+ CellChangeTimes->{
+  3.6978263557294683`*^9, {3.697826436386983*^9, 3.6978264532710257`*^9}, {
+   3.697826718648246*^9, 3.6978267326161585`*^9}, {3.6978268994197645`*^9, 
+   3.6978269200907383`*^9}, {3.697829049272724*^9, 3.6978290626315837`*^9}, 
+   3.6978966727272253`*^9, {3.6978968512577157`*^9, 3.697896859657054*^9}, {
+   3.697896907368522*^9, 3.697896924697859*^9}, 3.6978969626984076`*^9, 
+   3.6978970001415324`*^9, 3.6978974008554506`*^9, {3.6978976041066437`*^9, 
+   3.697897668805304*^9}, 3.6978977021300726`*^9, 3.697898106407999*^9, {
+   3.6978982518148317`*^9, 3.6978982652368855`*^9}, {3.697898318134583*^9, 
+   3.697898348908375*^9}, {3.697898397641607*^9, 3.697898403094796*^9}, 
+   3.6978984715808773`*^9, 3.69790106929741*^9, 3.6979012141363792`*^9, {
+   3.6979012520140977`*^9, 3.6979012621636877`*^9}, 3.697901463735253*^9, 
+   3.6979019000772276`*^9, 3.697902042831071*^9, {3.6979021504891157`*^9, 
+   3.697902156067318*^9}, 3.6979963108091674`*^9, 3.698411856760935*^9, 
+   3.6984195981970487`*^9, {3.699278170735946*^9, 3.6992781736266165`*^9}, 
+   3.744571296451768*^9},ExpressionUUID->"37f3dbd6-3333-450b-9cac-\
+46644adeff62"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Module", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"placeholder", "=", 
+      RowBox[{"{", "}"}]}], ",", 
+     RowBox[{"list", "=", 
+      RowBox[{"CellularAutomaton", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"224", ",", 
+          RowBox[{"{", 
+           RowBox[{"2", ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"2", ",", "2", ",", "2"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"2", ",", "1", ",", "2"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"2", ",", "2", ",", "2"}], "}"}]}], "}"}]}], "}"}], 
+          ",", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", "1"}], "}"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], "}"}], ",", "0"}], 
+         "}"}], ",", "50"}], "]"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"placeholder", "=", "values"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"list", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"placeholder", "==", 
+          RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"CellularAutomaton", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"224", ",", 
+             RowBox[{"{", 
+              RowBox[{"2", ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"2", ",", "2", ",", "2"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"2", ",", "1", ",", "2"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"2", ",", "2", ",", "2"}], "}"}]}], "}"}]}], "}"}], 
+             ",", 
+             RowBox[{"{", 
+              RowBox[{"1", ",", "1"}], "}"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], "}"}], ",", "0"}],
+             "}"}], ",", "50"}], "]"}], ",", 
+         RowBox[{"CellularAutomaton", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"224", ",", 
+             RowBox[{"{", 
+              RowBox[{"2", ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"2", ",", "2", ",", "2"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"2", ",", "1", ",", "2"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"2", ",", "2", ",", "2"}], "}"}]}], "}"}]}], "}"}], 
+             ",", 
+             RowBox[{"{", 
+              RowBox[{"1", ",", "1"}], "}"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Transpose", "@", 
+              RowBox[{"Partition", "[", 
+               RowBox[{
+                RowBox[{"ReplacePart", "[", 
+                 RowBox[{
+                  RowBox[{"Flatten", "@", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], "}"}]}], ",", 
+                  RowBox[{"Thread", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"placeholder", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"#", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}],
+                     "&"}], "/@", 
+                    RowBox[{"Range", "@", 
+                    RowBox[{"Length", "@", "placeholder"}]}]}], "\[Rule]", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"Length", "@", "placeholder"}]}], "]"}]}], 
+                   "]"}]}], "]"}], ",", "3"}], "]"}]}], ",", "0"}], "}"}], 
+           ",", "50"}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ArrayPlot", "[", 
+       RowBox[{"list", "[", 
+        RowBox[{"[", "var", "]"}], "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"values", ",", 
+         RowBox[{"{", "}"}], ",", "\"\<\>\""}], "}"}], ",", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"Module", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"x", "=", "i"}], "}"}], ",", 
+           RowBox[{"Row", "@", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Invisible", "@", "x"}], ",", 
+              RowBox[{"Dynamic", "@", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"placeholder", "\[NotEqual]", 
+                   RowBox[{"{", "}"}]}], "&&", 
+                  RowBox[{"MemberQ", "[", 
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"placeholder", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"#", ",", "1", ",", "1", ",", "1"}], "]"}], "]"}],
+                     "\[Equal]", "x"}], "&"}], "/@", 
+                    RowBox[{"Range", "@", 
+                    RowBox[{"Length", "@", "placeholder"}]}]}], ")"}], ",", 
+                    "True"}], "]"}]}], ",", 
+                 RowBox[{"ArrayPlot", "[", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"{", "1", "}"}], "}"}], ",", 
+                   RowBox[{"ImageSize", "\[Rule]", "20"}]}], "]"}], ",", 
+                 RowBox[{"ArrayPlot", "[", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"{", "0", "}"}], "}"}], ",", 
+                   RowBox[{"ImageSize", "\[Rule]", "20"}]}], "]"}]}], 
+                "]"}]}]}], "}"}]}]}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", "9", ",", "1"}], "}"}]}], "]"}], ",", 
+       "TogglerBar", ",", 
+       RowBox[{"Appearance", "\[Rule]", 
+        RowBox[{"\"\<Vertical\>\"", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"Automatic", ",", "3"}], "}"}]}]}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"var", ",", "1", ",", 
+       RowBox[{"Length", "@", "list"}], ",", "1"}], "}"}]}], 
+    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.697902935153296*^9, 3.697903001291946*^9}, {
+   3.697903036308153*^9, 3.697903263847148*^9}, {3.6979033351511803`*^9, 
+   3.6979033663155413`*^9}, {3.697903414051113*^9, 3.6979034232332015`*^9}, {
+   3.6979036924674015`*^9, 3.6979038038714848`*^9}, {3.6979038453030005`*^9, 
+   3.6979038866667914`*^9}, 3.6979039357292547`*^9, {3.6979039664099855`*^9, 
+   3.6979039679256296`*^9}, {3.6979043624645557`*^9, 3.697904414868129*^9}, 
+   3.697904675365842*^9, {3.697983550041914*^9, 3.6979835966312838`*^9}, {
+   3.6979836997936583`*^9, 3.697983706522463*^9}, {3.6979837381520824`*^9, 
+   3.697983755212183*^9}, {3.697985127765758*^9, 3.6979852091986895`*^9}, {
+   3.697985272031684*^9, 3.6979852891904726`*^9}, {3.6979853243287535`*^9, 
+   3.697985356941877*^9}, {3.6979854075293612`*^9, 3.6979854129092803`*^9}, {
+   3.6979854672457657`*^9, 3.697985501582263*^9}, {3.697985538308136*^9, 
+   3.697985538573747*^9}, {3.6979855759178653`*^9, 3.6979856229682817`*^9}, {
+   3.6979856724319005`*^9, 3.6979856735412903`*^9}, {3.6979857529771724`*^9, 
+   3.6979858044944897`*^9}, {3.6979960040874047`*^9, 
+   3.6979960156344986`*^9}, {3.6984196670106087`*^9, 3.698419670385668*^9}, {
+   3.698419774402601*^9, 3.698419812481307*^9}, {3.6984199135088243`*^9, 
+   3.698419954468948*^9}, {3.6984200674490185`*^9, 3.698420067667762*^9}, {
+   3.698420112418474*^9, 
+   3.6984201126060247`*^9}},ExpressionUUID->"4c842992-c51d-4ed7-b874-\
+a4a62fabd241"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`values$$ = {
+     Row[{
+       Invisible[2], 
+       Dynamic[
+        If[
+         And[$CellContext`placeholder$5225 != {}, 
+          MemberQ[
+           Map[
+           Part[$CellContext`placeholder$5225, #, 1, 1, 
+              1] == $CellContext`x$5227& , 
+            Range[
+             Length[$CellContext`placeholder$5225]]], True]], 
+         ArrayPlot[{{1}}, ImageSize -> 20], 
+         ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+     Row[{
+       Invisible[3], 
+       Dynamic[
+        If[
+         And[$CellContext`placeholder$5225 != {}, 
+          MemberQ[
+           Map[
+           Part[$CellContext`placeholder$5225, #, 1, 1, 
+              1] == $CellContext`x$5228& , 
+            Range[
+             Length[$CellContext`placeholder$5225]]], True]], 
+         ArrayPlot[{{1}}, ImageSize -> 20], 
+         ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+     Row[{
+       Invisible[5], 
+       Dynamic[
+        If[
+         And[$CellContext`placeholder$5225 != {}, 
+          MemberQ[
+           Map[
+           Part[$CellContext`placeholder$5225, #, 1, 1, 
+              1] == $CellContext`x$5230& , 
+            Range[
+             Length[$CellContext`placeholder$5225]]], True]], 
+         ArrayPlot[{{1}}, ImageSize -> 20], 
+         ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+     Row[{
+       Invisible[8], 
+       Dynamic[
+        If[
+         And[$CellContext`placeholder$5225 != {}, 
+          MemberQ[
+           Map[
+           Part[$CellContext`placeholder$5225, #, 1, 1, 
+              1] == $CellContext`x$5233& , 
+            Range[
+             Length[$CellContext`placeholder$5225]]], True]], 
+         ArrayPlot[{{1}}, ImageSize -> 20], 
+         ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+     Row[{
+       Invisible[9], 
+       Dynamic[
+        If[
+         And[$CellContext`placeholder$5225 != {}, 
+          MemberQ[
+           Map[
+           Part[$CellContext`placeholder$5225, #, 1, 1, 
+              1] == $CellContext`x$5234& , 
+            Range[
+             Length[$CellContext`placeholder$5225]]], True]], 
+         ArrayPlot[{{1}}, ImageSize -> 20], 
+         ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+     Row[{
+       Invisible[4], 
+       Dynamic[
+        If[
+         And[$CellContext`placeholder$5225 != {}, 
+          MemberQ[
+           Map[
+           Part[$CellContext`placeholder$5225, #, 1, 1, 
+              1] == $CellContext`x$5229& , 
+            Range[
+             Length[$CellContext`placeholder$5225]]], True]], 
+         ArrayPlot[{{1}}, ImageSize -> 20], 
+         ArrayPlot[{{0}}, ImageSize -> 20]]]}]}, $CellContext`var$$ = 1, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`values$$], {}, ""}, {
+       Row[{
+         Invisible[1], 
+         Dynamic[
+          If[
+           And[$CellContext`placeholder$5225 != {}, 
+            MemberQ[
+             Map[
+             Part[$CellContext`placeholder$5225, #, 1, 1, 
+                1] == $CellContext`x$5226& , 
+              Range[
+               Length[$CellContext`placeholder$5225]]], True]], 
+           ArrayPlot[{{1}}, ImageSize -> 20], 
+           ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+       Row[{
+         Invisible[2], 
+         Dynamic[
+          If[
+           And[$CellContext`placeholder$5225 != {}, 
+            MemberQ[
+             Map[
+             Part[$CellContext`placeholder$5225, #, 1, 1, 
+                1] == $CellContext`x$5227& , 
+              Range[
+               Length[$CellContext`placeholder$5225]]], True]], 
+           ArrayPlot[{{1}}, ImageSize -> 20], 
+           ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+       Row[{
+         Invisible[3], 
+         Dynamic[
+          If[
+           And[$CellContext`placeholder$5225 != {}, 
+            MemberQ[
+             Map[
+             Part[$CellContext`placeholder$5225, #, 1, 1, 
+                1] == $CellContext`x$5228& , 
+              Range[
+               Length[$CellContext`placeholder$5225]]], True]], 
+           ArrayPlot[{{1}}, ImageSize -> 20], 
+           ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+       Row[{
+         Invisible[4], 
+         Dynamic[
+          If[
+           And[$CellContext`placeholder$5225 != {}, 
+            MemberQ[
+             Map[
+             Part[$CellContext`placeholder$5225, #, 1, 1, 
+                1] == $CellContext`x$5229& , 
+              Range[
+               Length[$CellContext`placeholder$5225]]], True]], 
+           ArrayPlot[{{1}}, ImageSize -> 20], 
+           ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+       Row[{
+         Invisible[5], 
+         Dynamic[
+          If[
+           And[$CellContext`placeholder$5225 != {}, 
+            MemberQ[
+             Map[
+             Part[$CellContext`placeholder$5225, #, 1, 1, 
+                1] == $CellContext`x$5230& , 
+              Range[
+               Length[$CellContext`placeholder$5225]]], True]], 
+           ArrayPlot[{{1}}, ImageSize -> 20], 
+           ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+       Row[{
+         Invisible[6], 
+         Dynamic[
+          If[
+           And[$CellContext`placeholder$5225 != {}, 
+            MemberQ[
+             Map[
+             Part[$CellContext`placeholder$5225, #, 1, 1, 
+                1] == $CellContext`x$5231& , 
+              Range[
+               Length[$CellContext`placeholder$5225]]], True]], 
+           ArrayPlot[{{1}}, ImageSize -> 20], 
+           ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+       Row[{
+         Invisible[7], 
+         Dynamic[
+          If[
+           And[$CellContext`placeholder$5225 != {}, 
+            MemberQ[
+             Map[
+             Part[$CellContext`placeholder$5225, #, 1, 1, 
+                1] == $CellContext`x$5232& , 
+              Range[
+               Length[$CellContext`placeholder$5225]]], True]], 
+           ArrayPlot[{{1}}, ImageSize -> 20], 
+           ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+       Row[{
+         Invisible[8], 
+         Dynamic[
+          If[
+           And[$CellContext`placeholder$5225 != {}, 
+            MemberQ[
+             Map[
+             Part[$CellContext`placeholder$5225, #, 1, 1, 
+                1] == $CellContext`x$5233& , 
+              Range[
+               Length[$CellContext`placeholder$5225]]], True]], 
+           ArrayPlot[{{1}}, ImageSize -> 20], 
+           ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+       Row[{
+         Invisible[9], 
+         Dynamic[
+          If[
+           And[$CellContext`placeholder$5225 != {}, 
+            MemberQ[
+             Map[
+             Part[$CellContext`placeholder$5225, #, 1, 1, 
+                1] == $CellContext`x$5234& , 
+              Range[
+               Length[$CellContext`placeholder$5225]]], True]], 
+           ArrayPlot[{{1}}, ImageSize -> 20], 
+           ArrayPlot[{{0}}, ImageSize -> 20]]]}]}}, {
+      Hold[$CellContext`var$$], 1, 51, 1}}, Typeset`size$$ = {
+    360., {133., 138.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`values$5235$$ = 
+    0, $CellContext`var$5236$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`values$$ = {}, $CellContext`var$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`values$$, $CellContext`values$5235$$, 0], 
+        Hold[$CellContext`var$$, $CellContext`var$5236$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`placeholder$5225 = $CellContext`values$$; \
+$CellContext`list$5225 = If[$CellContext`placeholder$5225 == {}, 
+          
+          CellularAutomaton[{
+           224, {2, {{2, 2, 2}, {2, 1, 2}, {2, 2, 2}}}, {1, 1}}, {{{0, 0, 
+            0}, {0, 0, 0}, {0, 0, 0}}, 0}, 50], 
+          
+          CellularAutomaton[{
+           224, {2, {{2, 2, 2}, {2, 1, 2}, {2, 2, 2}}}, {1, 1}}, {
+            Transpose[
+             Partition[
+              ReplacePart[
+               Flatten[{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}], 
+               Thread[Map[Part[$CellContext`placeholder$5225, #, 1, 1, 1]& , 
+                  Range[
+                   Length[$CellContext`placeholder$5225]]] -> Table[1, 
+                  Length[$CellContext`placeholder$5225]]]], 3]], 0}, 50]]; 
+       ArrayPlot[
+         Part[$CellContext`list$5225, $CellContext`var$$]]), 
+      "Specifications" :> {{{$CellContext`values$$, {}, ""}, {
+          Row[{
+            Invisible[1], 
+            Dynamic[
+             If[
+              And[$CellContext`placeholder$5225 != {}, 
+               MemberQ[
+                Map[
+                Part[$CellContext`placeholder$5225, #, 1, 1, 
+                   1] == $CellContext`x$5226& , 
+                 Range[
+                  Length[$CellContext`placeholder$5225]]], True]], 
+              ArrayPlot[{{1}}, ImageSize -> 20], 
+              ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+          Row[{
+            Invisible[2], 
+            Dynamic[
+             If[
+              And[$CellContext`placeholder$5225 != {}, 
+               MemberQ[
+                Map[
+                Part[$CellContext`placeholder$5225, #, 1, 1, 
+                   1] == $CellContext`x$5227& , 
+                 Range[
+                  Length[$CellContext`placeholder$5225]]], True]], 
+              ArrayPlot[{{1}}, ImageSize -> 20], 
+              ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+          Row[{
+            Invisible[3], 
+            Dynamic[
+             If[
+              And[$CellContext`placeholder$5225 != {}, 
+               MemberQ[
+                Map[
+                Part[$CellContext`placeholder$5225, #, 1, 1, 
+                   1] == $CellContext`x$5228& , 
+                 Range[
+                  Length[$CellContext`placeholder$5225]]], True]], 
+              ArrayPlot[{{1}}, ImageSize -> 20], 
+              ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+          Row[{
+            Invisible[4], 
+            Dynamic[
+             If[
+              And[$CellContext`placeholder$5225 != {}, 
+               MemberQ[
+                Map[
+                Part[$CellContext`placeholder$5225, #, 1, 1, 
+                   1] == $CellContext`x$5229& , 
+                 Range[
+                  Length[$CellContext`placeholder$5225]]], True]], 
+              ArrayPlot[{{1}}, ImageSize -> 20], 
+              ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+          Row[{
+            Invisible[5], 
+            Dynamic[
+             If[
+              And[$CellContext`placeholder$5225 != {}, 
+               MemberQ[
+                Map[
+                Part[$CellContext`placeholder$5225, #, 1, 1, 
+                   1] == $CellContext`x$5230& , 
+                 Range[
+                  Length[$CellContext`placeholder$5225]]], True]], 
+              ArrayPlot[{{1}}, ImageSize -> 20], 
+              ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+          Row[{
+            Invisible[6], 
+            Dynamic[
+             If[
+              And[$CellContext`placeholder$5225 != {}, 
+               MemberQ[
+                Map[
+                Part[$CellContext`placeholder$5225, #, 1, 1, 
+                   1] == $CellContext`x$5231& , 
+                 Range[
+                  Length[$CellContext`placeholder$5225]]], True]], 
+              ArrayPlot[{{1}}, ImageSize -> 20], 
+              ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+          Row[{
+            Invisible[7], 
+            Dynamic[
+             If[
+              And[$CellContext`placeholder$5225 != {}, 
+               MemberQ[
+                Map[
+                Part[$CellContext`placeholder$5225, #, 1, 1, 
+                   1] == $CellContext`x$5232& , 
+                 Range[
+                  Length[$CellContext`placeholder$5225]]], True]], 
+              ArrayPlot[{{1}}, ImageSize -> 20], 
+              ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+          Row[{
+            Invisible[8], 
+            Dynamic[
+             If[
+              And[$CellContext`placeholder$5225 != {}, 
+               MemberQ[
+                Map[
+                Part[$CellContext`placeholder$5225, #, 1, 1, 
+                   1] == $CellContext`x$5233& , 
+                 Range[
+                  Length[$CellContext`placeholder$5225]]], True]], 
+              ArrayPlot[{{1}}, ImageSize -> 20], 
+              ArrayPlot[{{0}}, ImageSize -> 20]]]}], 
+          Row[{
+            Invisible[9], 
+            Dynamic[
+             If[
+              And[$CellContext`placeholder$5225 != {}, 
+               MemberQ[
+                Map[
+                Part[$CellContext`placeholder$5225, #, 1, 1, 
+                   1] == $CellContext`x$5234& , 
+                 Range[
+                  Length[$CellContext`placeholder$5225]]], True]], 
+              ArrayPlot[{{1}}, ImageSize -> 20], 
+              ArrayPlot[{{0}}, ImageSize -> 20]]]}]}, ControlType -> 
+         TogglerBar, 
+         Appearance -> ("Vertical" -> {Automatic, 3})}, {$CellContext`var$$, 
+         1, 51, 1}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{411., {221., 227.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.6979854238162184`*^9, 3.697985486168282*^9, 3.6979855390522413`*^9, 
+   3.6979856749850125`*^9, {3.6979857659486012`*^9, 3.6979857718842945`*^9}, 
+   3.6979858052824297`*^9, {3.697995993634163*^9, 3.6979960161031837`*^9}, 
+   3.6979963110279207`*^9, 3.69841185693283*^9, 3.6984195985720687`*^9, 
+   3.6984196796514235`*^9, 3.6984197809026184`*^9, 3.6984198128250003`*^9, {
+   3.698419943946795*^9, 3.698419955047082*^9}, 3.6984200678708897`*^9, 
+   3.698420113059105*^9, {3.6992781708921986`*^9, 3.6992781738609924`*^9}, 
+   3.7445712966412926`*^9},ExpressionUUID->"2c27915e-dab8-49ff-965d-\
+ad125ab60076"]
+}, Open  ]]
+},
+WindowSize->{1264, 626},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.1 for Microsoft Windows (64-bit) (April 18, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1273, 34, 30, "Input", "ExpressionUUID" -> \
+"11cf0cca-6ea7-4aa7-86e7-a93958b22bb5"],
+Cell[1834, 56, 4450, 121, 278, "Input", "ExpressionUUID" -> \
+"7a9ebd31-9189-4884-bc39-616a1613b5b1"],
+Cell[6287, 179, 383, 10, 30, "Input", "ExpressionUUID" -> \
+"eb9b4f48-b973-4c8f-ab09-d62235b05a8c"],
+Cell[CellGroupData[{
+Cell[6695, 193, 311, 8, 30, "Input", "ExpressionUUID" -> \
+"9c81e426-7df4-4354-ad1b-91e5e198659d"],
+Cell[7009, 203, 705, 17, 374, "Output", "ExpressionUUID" -> \
+"3906ba44-29b7-4ee5-b79a-77a310e4b003"]
+}, Open  ]],
+Cell[7729, 223, 2160, 58, 50, "Input", "ExpressionUUID" -> \
+"5edbf950-b462-44c6-bdfb-e39b285cc152"],
+Cell[CellGroupData[{
+Cell[9914, 285, 312, 8, 30, "Input", "ExpressionUUID" -> \
+"4c29d2c4-ee87-4150-a60a-e7a37936768b"],
+Cell[10229, 295, 733, 17, 374, "Output", "ExpressionUUID" -> \
+"9e43575e-02d6-455c-aa02-c9ac0609eace"]
+}, Open  ]],
+Cell[10977, 315, 9508, 219, 734, "Input", "ExpressionUUID" -> \
+"d75341f0-e0ce-48e7-b809-9512a5d4e0e1"],
+Cell[CellGroupData[{
+Cell[20510, 538, 326, 8, 30, "Input", "ExpressionUUID" -> \
+"e951e8ac-e030-4a9f-8de3-e86254977862"],
+Cell[20839, 548, 786, 18, 117, "Output", "ExpressionUUID" -> \
+"9ae80cea-d846-4eb5-ad3c-35a9ce64e6ed"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21662, 571, 427, 10, 69, "Input", "ExpressionUUID" -> \
+"fe4f74c1-e860-4113-a11a-622ad06c000d"],
+Cell[22092, 583, 1898, 38, 493, "Output", "ExpressionUUID" -> \
+"03372221-93a4-4439-9c9a-d02eedc686af"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24027, 626, 616, 14, 69, "Input", "ExpressionUUID" -> \
+"40006fcb-d4b6-40b8-a6e2-78080423e414"],
+Cell[24646, 642, 1991, 41, 213, "Output", "ExpressionUUID" -> \
+"96dd6da3-ad78-4055-844a-c20f0c5825ef"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26674, 688, 1425, 25, 69, "Input", "ExpressionUUID" -> \
+"f9a7290a-220e-43b6-a764-1f5d1ec0d7d3"],
+Cell[28102, 715, 2022, 40, 471, "Output", "ExpressionUUID" -> \
+"0d2d7093-bdc6-43f3-9a95-47147f7a8a15"]
+}, Open  ]],
+Cell[30139, 758, 289, 7, 30, "Input", "ExpressionUUID" -> \
+"c9e2cd57-98a9-481e-82e9-83eed92c1ff9"],
+Cell[CellGroupData[{
+Cell[30453, 769, 2423, 59, 145, "Input", "ExpressionUUID" -> \
+"cbdd61f2-54a2-4a76-ad83-08ad07cccbe4"],
+Cell[32879, 830, 18658, 538, 305, "Output", "ExpressionUUID" -> \
+"37f3dbd6-3333-450b-9cac-46644adeff62"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[51574, 1373, 8559, 201, 335, "Input", "ExpressionUUID" -> \
+"4c842992-c51d-4ed7-b874-a4a62fabd241"],
+Cell[60136, 1576, 14348, 378, 465, "Output", "ExpressionUUID" -> \
+"2c27915e-dab8-49ff-965d-ad125ab60076"]
+}, Open  ]]
+}
+]
+*)
+
